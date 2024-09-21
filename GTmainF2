@@ -1,0 +1,159 @@
+Sub ReplaceHyperlinkPartInAllSheets()
+
+    Dim ws As Worksheet
+
+    Dim cell As Range
+
+    Dim oldText As String
+
+    Dim newText As String
+
+    Dim currentLink As String
+
+    Dim targetRange As Range
+ 
+    ' Define the old text you want to replace and the new text
+
+    oldText = "http://oldlink.com" ' Change this to the part of the hyperlink you want to replace
+
+    newText = "http://newlink.com" ' Change this to the new link you want to insert
+ 
+    ' Loop through all the worksheets in the workbook
+
+    For Each ws In ThisWorkbook.Sheets
+
+        ' Define the target range for each sheet
+
+        ' Change this to the appropriate range of cells that may contain hyperlinks in each sheet
+
+        On Error Resume Next
+
+        Set targetRange = ws.UsedRange.SpecialCells(xlCellTypeConstants, xlTextValues)
+
+        On Error GoTo 0
+
+        ' Only proceed if the sheet contains hyperlinks
+
+        If Not targetRange Is Nothing Then
+
+            ' Loop through each cell in the range that may contain hyperlinks
+
+            For Each cell In targetRange
+
+                If cell.Hyperlinks.Count > 0 Then
+
+                    ' Get the current hyperlink URL
+
+                    currentLink = cell.Hyperlinks(1).Address
+
+                    ' Check if the current link contains the old text
+
+                    If InStr(currentLink, oldText) > 0 Then
+
+                        ' Replace the old text with the new text
+
+                        currentLink = Replace(currentLink, oldText, newText)
+
+                        ' Update the hyperlink with the modified URL
+
+                        cell.Hyperlinks(1).Address = currentLink
+
+                    End If
+
+                End If
+
+            Next cell
+
+        End If
+
+        ' Reset the targetRange for the next sheet
+
+        Set targetRange = Nothing
+
+    Next ws
+ 
+    MsgBox "Hyperlink URLs have been updated across all sheets!"
+
+End Sub
+
+ 
+In our Case
+Sub ReplaceHyperlinkPartInAllSheets()
+
+    Dim ws As Worksheet
+
+    Dim cell As Range
+
+    Dim oldText As String
+
+    Dim newText As String
+
+    Dim currentLink As String
+
+    Dim targetRange As Range
+ 
+    ' Define the old text you want to replace and the new text
+
+    oldText = "C:\Users\Anil Meher\AppData\Roaming\Microsoft\Excel" ' Change this to the part of the hyperlink you want to replace
+
+    newText = "D:\PIID_PAW" ' Change this to the new link you want to insert
+ 
+    ' Loop through all the worksheets in the workbook
+
+    For Each ws In ThisWorkbook.Sheets
+
+        ' Define the target range for each sheet
+
+        ' Change this to the appropriate range of cells that may contain hyperlinks in each sheet
+
+        On Error Resume Next
+
+        Set targetRange = ws.UsedRange.SpecialCells(xlCellTypeConstants, xlTextValues)
+
+        On Error GoTo 0
+
+        ' Only proceed if the sheet contains hyperlinks
+
+        If Not targetRange Is Nothing Then
+
+            ' Loop through each cell in the range that may contain hyperlinks
+
+            For Each cell In targetRange
+
+                If cell.Hyperlinks.Count > 0 Then
+
+                    ' Get the current hyperlink URL
+
+                    currentLink = cell.Hyperlinks(1).Address
+
+                    ' Check if the current link contains the old text
+
+                    If InStr(currentLink, oldText) > 0 Then
+
+                        ' Replace the old text with the new text
+
+                        currentLink = Replace(currentLink, oldText, newText)
+
+                        ' Update the hyperlink with the modified URL
+
+                        cell.Hyperlinks(1).Address = currentLink
+
+                    End If
+
+                End If
+
+            Next cell
+
+        End If
+
+        ' Reset the targetRange for the next sheet
+
+        Set targetRange = Nothing
+
+    Next ws
+ 
+    MsgBox "Hyperlink URLs have been updated across all sheets!"
+
+End Sub
+
+ 
